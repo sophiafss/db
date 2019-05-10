@@ -111,8 +111,22 @@ if __name__ == '__main__':
     get(codes, 'ev', 'unit=1;tradeDate={}'.format(date), '总市值1')
 
     # ////////// 风险分析
+    
+    ## /// BETA
+    get(codes,"beta_100w","tradeDate={}".format(data),'BETA')
+    
+
     # ////////// 盈利预测
+    
+    ##///一致预测每股收益(本年度）
+    get(codes,''
+    
     # ////////// 财务分析
+    
+    ##/// 单季度基本每股收益 
+    get(codes, "wgsd_qfa_eps_basic","rptDate={};rptType=1;currencyType=".format(date),'单季度基本每股收益 ','合并报表'）
+
+    
     # ////////// 财务报表
     # /// 存货
     get(codes, 'inventories', 'unit=1;rptDate={};rptType=1'.format(date), '存货', '合并报表')
@@ -141,6 +155,11 @@ if __name__ == '__main__':
     # /// 构建固定资产、无形资产和其他长期资产支付的现金
     get(codes, 'cash_pay_acq_const_fiolta', 'unit=1;rptDate={};rptType=1'.format(date), '构建固定资产、无形资产和其他长期资产支付的现金', '合并报表')
 
+    ## /// 单季度净利润
+    get(codes, 'wgsd_qfa_nogaapprofit','unit=1;rptDate={};rptType=1;currencyType='.format(date),'单季度净利润','合并报表')
+    
+
+    
     # ////////// 报表附注
     # /// 固定资产-累计折旧
     get(codes, 'stmnote_assetdetail_2', 'unit=1;rptDate={}'.format(date), '固定资产-累计折旧')
@@ -168,6 +187,19 @@ if __name__ == '__main__':
     # ////////// 股权分置改革
     # ////////// 技术形态
     # ////////// 其他指标
+    
+    ## /// 增长率——利润总额
+    get(codes, 'fa_tpgr_ttm', '增长率——利润总额','tradeDate={}'.format(date))
+    
+    ## /// 增长率——净利润
+    get(codes, 'fa_npgr_ttm', '增长率——净利润','tradeDate={}'.format(date))
+    
+    ##/// 20日收益方差
+    get(codes,"risk_variance20",'20日收益方差','tradeDate={}'.format(date))
+    w.wss("000001.SZ", "risk_variance120","tradeDate=20190509")
+    
+   
+    
 
     for code, docs in data_dict.items():
         client['STOCK'][code].insert_many(docs)
