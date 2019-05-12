@@ -109,6 +109,22 @@ if __name__ == '__main__':
     # ////////// 估值指标
     # /// 总市值1
     get(codes, 'ev', 'unit=1;tradeDate={}'.format(date), '总市值1')
+    
+    ## ///每股收益
+    get(codes,"eps_ttm","tradeDate={}".format(data),'每股收益')
+    
+    ## ///市现率
+    get(codes,"pcf_ocf","tradeDate={};ruleType=2".format(data),'市现率经营现金流','上年年报')
+    get(codes,"pcf_ncf","tradeDate={};ruleType=2".format(data),'市现率现金净流量','上年年报')
+    
+    ## ///市盈率
+    get(codes, "qstmnote_insur_212530","unit=1;rptDate={}".format(date),'市盈率')
+    
+    ## ///股息率
+    get(codes, "dividendyield","tradeDate={};rptYear=2018".format(date),'股息率')
+    
+   
+    
 
     # ////////// 风险分析
     
@@ -118,14 +134,31 @@ if __name__ == '__main__':
 
     # ////////// 盈利预测
     
-    ##///一致预测每股收益(本年度）
-    get(codes,''
+    ##///一致预测每股收益
+    get(codes, "west_eps_FY1","tradeDate={}".format(date),'致预测每股收益(FY1)')
+    get(codes, "west_eps_FY2","tradeDate={}".format(date),'致预测每股收益(FY2)')
+    get(codes, "west_eps_FY3","tradeDate={}".format(date),'致预测每股收益(FY3)')
     
     # ////////// 财务分析
     
     ##/// 单季度基本每股收益 
     get(codes, "wgsd_qfa_eps_basic","rptDate={};rptType=1;currencyType=".format(date),'单季度基本每股收益 ','合并报表'）
 
+    ## ///总资产净利率ROA
+    get(codes,"roa","rptDate={}".format(date),'总资产净利率ROA') 
+    
+    ## /// 研发支出合计
+    get(codes, "stmnote_RDexp","unit=1;rptDate={};rptType=1".format(date),'研发支出合计')
+        
+    ## /// 净现金流
+    get(codes, "qstmnote_insur_212530","unit=1;rptDate={}".format(date),'净现金流')    
+        
+    ## ///净营运资本
+    get(codes ,"networkingcapital","unit=1;rptDate={}".format(date),'净营运资本')    
+        
+        
+    ## /// 每股现金流净额
+    get(codes, "cfps","rptDate={};currencyType=".format(date),'每股现金流净额')    
     
     # ////////// 财务报表
     # /// 存货
@@ -158,8 +191,30 @@ if __name__ == '__main__':
     ## /// 单季度净利润
     get(codes, 'wgsd_qfa_nogaapprofit','unit=1;rptDate={};rptType=1;currencyType='.format(date),'单季度净利润','合并报表')
     
-
+    ## ///投资活动现金流出小计
+    get(codes, "stot_cash_outflows_inv_act","unit=1;rptDate={};rptType=1".format(date),'投资活动现金流出小计')
+       
+    ## /// 销售费用  
+    get(codes, "operateexpense_ttm2","unit=1;rptDate={}".format(date),'销售费用','合并报表')
+     
+    ## /// 资产总计
+    get(codes, "tot_assets","unit=1;rptDate={};rptType=1".format(date),'资产总计','合并报表')  
     
+    ## ///所有者权益合计
+    get(codes, "tot_equity","unit=1;rptDate={};rptType=1".format(date),'所有者权益合计','合并报表')
+        
+    ## ///营业总收入
+    get(codes, "tot_oper_rev","unit=1;rptDate={};rptType=1".format(date),'营业总收入','合并报表')
+
+    ## /// 货币资金
+    get(codes, "monetary_cap","unit=1;rptDate={};rptType=1".format(date),'货币资金','合并报表')
+        
+    ## /// 交易性金融资产
+    get(codes,"wgsd_invest_trading","unit=1;rptDate={};rptType=1;currencyType=".format(date),'交易性金融资产','合并报表') 
+        
+    ## ///总资产
+    get(codes, "wgsd_assets","unit=1;rptDate={};rptType=1;currencyType=".format(date),'总资产','合并报表')
+        
     # ////////// 报表附注
     # /// 固定资产-累计折旧
     get(codes, 'stmnote_assetdetail_2', 'unit=1;rptDate={}'.format(date), '固定资产-累计折旧')
@@ -172,9 +227,26 @@ if __name__ == '__main__':
 
     # /// 油气资源-累计折耗
     get(codes, 'stmnote_assetdetail_14', 'unit=1;rptDate={}'.format(date), '油气资源-累计折耗')
+        
+        
+    ## /// 广告宣传推广费
+    get(codes, "stmnote_others_7633","unit=1;rptDate={};rptType=1".format(date),'广告宣传推广费','合并报表')
+      
+    ## ///商誉减值损失
+    get(codes, "stmnote_ImpairmentLoss_6","unit=1;rptDate={};rptType=1".format(date),'商誉减值损失','合并报表')
 
     # ////////// 分红指标
     # ////////// 首发指标
+    
+    ## ///发行数量合计
+    get(codes, "ipo_amount","unit=1",'发行数量合计')
+        
+    ## ///新股发行数量    
+    get(codes ,"ipo_newshares","unit=1",'新股发行数量 ')
+        
+    ## ///首发上市日期
+    get(codes ,"ipo_date",'首发上市日期')    
+        
     # ////////// 增发指标
     # /// 增发上市日
     get(codes, 'fellow_listeddate', 'year=2018', '增发上市日', flag=False)
@@ -189,14 +261,18 @@ if __name__ == '__main__':
     # ////////// 其他指标
     
     ## /// 增长率——利润总额
-    get(codes, 'fa_tpgr_ttm', '增长率——利润总额','tradeDate={}'.format(date))
+    get(codes, 'fa_tpgr_ttm','tradeDate={}'.format(date),'增长率——利润总额')
     
     ## /// 增长率——净利润
-    get(codes, 'fa_npgr_ttm', '增长率——净利润','tradeDate={}'.format(date))
+    get(codes, 'fa_npgr_ttm' ,'tradeDate={}'.format(date),'增长率——净利润')
     
     ##/// 20日收益方差
-    get(codes,"risk_variance20",'20日收益方差','tradeDate={}'.format(date))
-    w.wss("000001.SZ", "risk_variance120","tradeDate=20190509")
+    get(codes,"risk_variance20",'tradeDate={}'.format(date),'20日收益方差')
+     
+    ##///现金流资产比——资产回报率
+    get(codes,"fa_acca_ttm",'tradeDate={}'.format(date),'现金流资产比——资产回报率')
+
+  
     
    
     
